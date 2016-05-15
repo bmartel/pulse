@@ -1,0 +1,6 @@
+/vendor
+/tmp
+.env
+pulse
+/static/assets/*
+!/static/assets/.keep

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ .title }}</title>
+    <meta name="description" content="{{ .description }}">
+    <!-- Render the partial template called `meta-$current_template` here -->
+    {{ partial "meta" }}
+
+    <!-- Render the partial template called `css-$current_template` here -->
+    {{ partial "css" }}
+  </head>
+  <body>
+    <main class="container">
+      <!-- render the partial template called `header-$current_template` here -->
+      {{ partial "header" }}
+
+      <!-- Render the current template here -->
+      {{ yield }}
+
+      <!-- render the partial template called `footer-$current_template` here -->
+      {{ partial "footer" }}
+    </main>
+
+    <!-- render the partial template called `js-$current_template` here -->
+    {{ partial "js" }}
+  </body>
+</html>
