@@ -18,8 +18,8 @@ func Sqlite() *gorm.DB {
 // Postgres ...
 func Postgres() *gorm.DB {
 	db, err := gorm.Open("postgres", fmt.Sprintf(
-		"host=%s:%s user=%s dbname=%s sslmode=%s password=%s",
-		DbHost, DbPort, DbUsername, DbDatabase, DbSSL, DbPassword))
+		"postgresql://%s:%s@%s:%s/%s?sslmode=%s",
+		DbUsername, DbPassword, DbHost, DbPort, DbDatabase, DbSSL))
 	if err != nil {
 		panic(err)
 	}
