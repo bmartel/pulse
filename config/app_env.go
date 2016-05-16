@@ -27,6 +27,9 @@ var AppDomain = os.Getenv("APP_DOMAIN")
 // SessionKey ... Application user session key
 var SessionKey = os.Getenv("SESSION_KEY")
 
+// AssetDir ... Application assets path
+var AssetDir = os.Getenv("ASSET_DIR")
+
 // === DATABASE ===
 
 // DbHost ... Database connection ip

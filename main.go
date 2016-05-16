@@ -62,6 +62,12 @@ func main() {
 	// Initialize Middleware
 	mw := negroni.New()
 
+	// Compression
+	mw.Use(gzip.Gzip(gzip.DefaultCompression))
+
+	// Public Files ... Assets, Images
+	mw.Use(negroni.NewStatic(http.Dir(config.AssetDir)))
+
 	// Recovery
 	mw.Use(negroni.NewRecovery())
 
@@ -77,12 +83,6 @@ func main() {
 		[]byte(config.AppKey),
 		csrf.Secure(config.AppEnv == "production"),
 	)
-
-	// Compression
-	mw.Use(gzip.Gzip(gzip.DefaultCompression))
-
-	// Public Files ... Assets, Images
-	mw.Use(negroni.NewStatic(http.Dir("public")))
 
 	// Register Application Routes
 	app.Routes.Register(router)
