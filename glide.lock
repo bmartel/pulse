@@ -1,5 +1,5 @@
-hash: ec3034b6fc77e86fa9c26e648b8c784cb646a0b518518c5a4c1ee762f3d7b394
-updated: 2016-05-15T00:11:36.674715722-05:00
+hash: 242fdddb54bddc3be7ca2954e5e25e9aa258e5121ce54e898454f3d377def849
+updated: 2016-05-15T21:24:18.701539302-05:00
 imports:
 - name: github.com/codegangsta/negroni
   version: dc45282b3653ee198a3c06a82bc7847b03666497
@@ -15,6 +15,8 @@ imports:
   - cookiestore
 - name: github.com/gorilla/context
   version: a8d44e7d8e4d532b6a27a02dd82abb31cc1b01bd
+- name: github.com/gorilla/csrf
+  version: 58276522e5876c9497f406c0212e46f8c7b9999d
 - name: github.com/gorilla/securecookie
   version: 667fe4e3466a040b780561fe9b51a83a3753eefc
 - name: github.com/gorilla/sessions
@@ -44,7 +46,7 @@ imports:
 - name: github.com/unrolled/secure
   version: 4b41e52ab568cbfd31eda3612d98192da1575c77
 - name: golang.org/x/sys
-  version: 33267e036fd93fcd26ea95b7bdaf2d8306cb743c
+  version: f78f5183ff267d751d0af20bbe59158f3e4cd53e
   subpackages:
   - unix
 devImports: []

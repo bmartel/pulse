@@ -12,6 +12,7 @@ import (
 	"github.com/goincremental/negroni-sessions"
 	"github.com/goincremental/negroni-sessions/cookiestore"
 	"github.com/gorilla/context"
+	"github.com/gorilla/csrf"
 	logroni "github.com/meatballhat/negroni-logrus"
 	"github.com/phyber/negroni-gzip/gzip"
 	"github.com/unrolled/render"
@@ -71,6 +72,12 @@ func main() {
 	store := cookiestore.New([]byte(config.AppKey))
 	mw.Use(sessions.Sessions(config.SessionKey, store))
 
+	// Csrf
+	csrfProtect := csrf.Protect(
+		[]byte(config.AppKey),
+		csrf.Secure(config.AppEnv == "production"),
+	)
+
 	// Compression
 	mw.Use(gzip.Gzip(gzip.DefaultCompression))
 
@@ -81,7 +88,7 @@ func main() {
 	app.Routes.Register(router)
 
 	// Apply Middleware to Router
-	mw.UseHandler(context.ClearHandler(router))
+	mw.UseHandler(context.ClearHandler(csrfProtect(router)))
 
 	// Run Application
 	mw.Run(config.AppPort)

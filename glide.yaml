@@ -10,3 +10,4 @@ import:
 - package: github.com/meatballhat/negroni-logrus
 - package: github.com/goincremental/negroni-sessions
 - package: github.com/phyber/negroni-gzip
+- package: github.com/gorilla/csrf
