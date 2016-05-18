@@ -11,3 +11,6 @@ import:
 - package: github.com/goincremental/negroni-sessions
 - package: github.com/phyber/negroni-gzip
 - package: github.com/gorilla/csrf
+- package: github.com/rs/cors
+- package: github.com/dgrijalva/jwt-go
+- package: github.com/auth0/go-jwt-middleware
