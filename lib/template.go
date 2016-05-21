@@ -1,4 +1,4 @@
-package helpers
+package lib
 
 import (
 	"html/template"

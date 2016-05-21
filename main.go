@@ -3,9 +3,6 @@ package main
 import (
 	"net/http"
 
-	"github.com/bmartel/pulse/app"
-	"github.com/bmartel/pulse/config"
-	"github.com/bmartel/pulse/helpers"
 	"github.com/codegangsta/negroni"
 	"github.com/facebookgo/inject"
 	"github.com/go-zoo/bone"
@@ -32,15 +29,15 @@ func main() {
 	var app App
 
 	// Database connection
-	db := config.Sqlite()
-	// db := config.Postgres()
-	// db := config.Mysql()
+	db := lib.Sqlite()
+	// db := lib.Postgres()
+	// db := lib.Mysql()
 
 	// Run any necessary migrations on Application boot
 	config.AutoMigrate(db)
 
 	// Register Template Functions
-	templateHelpers := helpers.DefineTemplateFuncs(func(tmpl *helpers.Template) {
+	templateHelpers := lib.DefineTemplateFuncs(func(tmpl *lib.Template) {
 		// Add any template functions needed
 		// tmpl.Add(name, fn)
 	})
@@ -66,7 +63,7 @@ func main() {
 	mw.Use(gzip.Gzip(gzip.DefaultCompression))
 
 	// Public Files ... Assets, Images
-	mw.Use(negroni.NewStatic(http.Dir(config.AssetDir)))
+	mw.Use(negroni.NewStatic(http.Dir(lib.AssetDir)))
 
 	// Recovery
 	mw.Use(negroni.NewRecovery())
@@ -75,13 +72,13 @@ func main() {
 	mw.Use(logroni.NewMiddleware())
 
 	// Session Store
-	store := cookiestore.New([]byte(config.AppKey))
-	mw.Use(sessions.Sessions(config.SessionKey, store))
+	store := cookiestore.New([]byte(lib.AppKey))
+	mw.Use(sessions.Sessions(lib.SessionKey, store))
 
 	// Csrf
 	csrfProtect := csrf.Protect(
-		[]byte(config.AppKey),
-		csrf.Secure(config.AppEnv == "production"),
+		[]byte(lib.AppKey),
+		csrf.Secure(lib.AppEnv == "production"),
 	)
 
 	// Register Application Routes
@@ -91,5 +88,5 @@ func main() {
 	mw.UseHandler(context.ClearHandler(csrfProtect(router)))
 
 	// Run Application
-	mw.Run(config.AppPort)
+	mw.Run(lib.AppPort)
 }

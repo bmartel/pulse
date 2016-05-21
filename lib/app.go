@@ -1,4 +1,4 @@
-package config
+package lib
 
 import (
 	"os"
@@ -31,6 +31,10 @@ var SessionKey = os.Getenv("SESSION_KEY")
 var AssetDir = os.Getenv("ASSET_DIR")
 
 // === DATABASE ===
+
+// DbURL ... Fully qualified database connection url,
+// if this is set all other db settings are ignored
+var DbURL = os.Getenv("DATABASE_URL")
 
 // DbHost ... Database connection ip
 var DbHost = os.Getenv("DB_HOST")
