@@ -1,6 +1,6 @@
 install:
 	glide init
-	glide up
+	glide get github.com/bmartel/pulse-core
 
 development:
 	go build

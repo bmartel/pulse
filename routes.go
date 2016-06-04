@@ -7,7 +7,7 @@ import (
 
 // Routes ...
 type Routes struct {
-	Index *controller.Index `inject:""`
+	*controller.Index `inject:""`
 }
 
 // Register ... Application Routes
