@@ -1,4 +1,6 @@
 install:
+	rm -rf .git
+	git init
 	cp example.env .env
 	glide init
 	glide get github.com/eknkc/amber
@@ -11,6 +13,8 @@ install:
 	glide get github.com/Sirupsen/logrus
 	glide up
 	go get bitbucket.org/liamstask/goose/cmd/goose
+	git add --all
+	git commit -m"Initial Commit"
 
 development:
 	go build
