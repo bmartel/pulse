@@ -4,11 +4,13 @@ Cutting down the boilerplate to create impactful Go web apps.
 ## Getting started
 Run `make install`
 
-This will
-### Add project dependencies to glide
-### Copy `example.env` and modify for your environment
-  cp example.env .env
-### Fetch database migration tool
+*This will*
+##### Add project dependencies to glide
+##### Copy `example.env` and modify for your environment
+  
+  `cp example.env .env`
+
+##### Fetch database migration tool
 
 ### Build
 Simply running `go build` will build the project, and running the output binary
