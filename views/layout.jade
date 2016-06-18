@@ -1,0 +1,18 @@
+doctype 5
+html[lang="en"]
+  head
+    block head
+    meta[charset="utf-8"]
+    meta[name="viewport"][content="width=device-width, initial-scale=1"]
+    meta[http-equiv="x-ua-compatible"][content="ie=edge"]
+    link[rel="stylesheet"][href="https://fonts.googleapis.com/css?family=Orbitron"]
+    link[rel="icon"][type="image/x-icon"][href="/static/favicon.ico"]
+
+    if Csrf
+        meta[name="_csrf"][content=Csrf]
+
+  body
+    block header
+    block content
+    block footer
+    block js

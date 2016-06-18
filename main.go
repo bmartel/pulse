@@ -1,36 +1,88 @@
 package main
 
 import (
-	pulseApp "github.com/bmartel/pulse-core/app"
-	"github.com/bmartel/pulse-core/db"
-	"github.com/bmartel/pulse-core/env"
-	"github.com/bmartel/pulse-core/template"
+	"net/http"
+	"time"
+
+	"github.com/Sirupsen/logrus"
 	"github.com/facebookgo/inject"
+	"github.com/gin-gonic/contrib/cache"
+	"github.com/gin-gonic/contrib/ginrus"
+	"github.com/gin-gonic/contrib/sessions"
+	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
+	"github.com/utrack/gin-csrf"
 )
 
-// App ... Pulse Application Graph
+// App ... Application Graph
 type App struct {
-	*Routes `inject:""`
+	*app.RouteMap `inject:""`
 }
 
 func main() {
 
 	var appGraph App
 
-	pulse := pulseApp.New()
-
 	// Database connection
-	dbConn := db.New(env.DbType)
+	dbConn, err := gorm.Open(config.DbType, config.DbURL)
+	if err != nil {
+		panic(err)
+	}
 
-	// Content Renderer
-	contentRender := template.DefaultRenderer()
+	// Redis Connection
+	redisConn := cache.NewRedisCache(config.RedisHost, config.RedisPassword, 5*time.Minute)
 
 	// Dependency injection
-	inject.Populate(dbConn, contentRender, &appGraph)
+	inject.Populate(dbConn, redisConn, &appGraph)
+
+	// Router
+	r := gin.New()
+
+	// Html Template Renderer
+	r.HTMLRender = NewAmberRenderer(config.ViewDir, config.ViewExt, nil)
+
+	// Load Assets
+	r.Static(config.AssetPath, config.AssetDir)
+
+	// Declare a subgroup for app routes so middleware is not run for templates or assets
+	router := r.Group("/")
+
+	// Logging
+	router.Use(ginrus.Ginrus(logrus.StandardLogger(), time.RFC3339, true))
+
+	// Cookie Session Store
+	sessionStore := sessions.NewCookieStore([]byte(config.AppKey))
+	sessionStore.Options(func() sessions.Options {
+		options := sessions.Options{
+			Path:     "/",
+			Domain:   config.AppDomain,
+			MaxAge:   86400 * 14,
+			Secure:   true,
+			HttpOnly: true,
+		}
+
+		if config.AppEnv != "production" {
+			options.Secure = false
+		}
+
+		return options
+	}())
+
+	// Session
+	router.Use(sessions.Sessions(config.SessionKey, sessionStore))
+
+	// CSRF
+	router.Use(csrf.Middleware(csrf.Options{
+		Secret: config.AppKey,
+		ErrorFunc: func(c *gin.Context) {
+			c.String(http.StatusBadRequest, "CSRF token mismatch")
+			c.Abort()
+		},
+	}))
 
 	// Register routes
-	pulse.Routes(appGraph.Routes)
+	appGraph.RouteMap.Register(router)
 
 	// Run application on $APP_PORT
-	pulse.Run()
+	r.Run(config.AppPort)
 }
