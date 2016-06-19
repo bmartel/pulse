@@ -8,10 +8,10 @@ import (
 	"github.com/facebookgo/inject"
 	"github.com/gin-gonic/contrib/cache"
 	"github.com/gin-gonic/contrib/ginrus"
+	"github.com/gin-gonic/contrib/gzip"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/utrack/gin-csrf"
 )
 
 // App ... Application Graph
@@ -40,6 +40,9 @@ func main() {
 
 	// Html Template Renderer
 	r.HTMLRender = NewAmberRenderer(config.ViewDir, config.ViewExt, nil)
+
+	// Compression
+	r.Use(gzip.Gzip(gzip.DefaultCompression))
 
 	// Load Assets
 	r.Static(config.AssetPath, config.AssetDir)
