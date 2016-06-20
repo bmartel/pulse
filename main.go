@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -11,7 +12,9 @@ import (
 	"github.com/gin-gonic/contrib/gzip"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
+	"github.com/proximityinnovations/pulse/app"
+	"github.com/proximityinnovations/pulse/config"
+	"github.com/proximityinnovations/pulse/db"
 )
 
 // App ... Application Graph
@@ -24,16 +27,13 @@ func main() {
 	var appGraph App
 
 	// Database connection
-	dbConn, err := gorm.Open(config.DbType, config.DbURL)
-	if err != nil {
-		panic(err)
-	}
+	mongoConn := db.ConnectMongo(strings.Split(config.DbHost, ","), config.DbUser, config.DbPass, config.DbDefault)
 
 	// Redis Connection
 	redisConn := cache.NewRedisCache(config.RedisHost, config.RedisPassword, 5*time.Minute)
 
 	// Dependency injection
-	inject.Populate(dbConn, redisConn, &appGraph)
+	inject.Populate(mongoConn, redisConn, &appGraph)
 
 	// Router
 	r := gin.New()

@@ -41,11 +41,17 @@ var ViewExt = os.Getenv("VIEW_EXT")
 
 // === DATABASE ===
 
-// DbURL ... Fully qualified database connection url
-var DbURL = os.Getenv("DATABASE_URL")
+// DbHost ... comma separated list of db hosts
+var DbHost = os.Getenv("DATABASE_HOST")
 
-// DbType ... Database connection type
-var DbType = os.Getenv("DATABASE_TYPE")
+// DbUser ... user to run database operations
+var DbUser = os.Getenv("DATABASE_USER")
+
+// DbPass ... db user password
+var DbPass = os.Getenv("DATABASE_PASSWORD")
+
+// DbDefault ... app default database
+var DbDefault = os.Getenv("DATABASE_DEFAULT")
 
 // === CACHE ===
 

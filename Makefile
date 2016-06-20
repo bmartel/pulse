@@ -5,14 +5,14 @@ install:
 	glide init
 	glide get github.com/eknkc/amber
 	glide get github.com/joho/godotenv
-	glide get github.com/jinzhu/gorm
+	glide get gopkg.in/mgo.v2
 	glide get github.com/gin-gonic/gin
 	glide get github.com/gin-gonic/gin/contrib
 	glide get github.com/facebookgo/inject
 	glide get github.com/utrack/gin-csrf
 	glide get github.com/Sirupsen/logrus
+	glide get github.com/proximityinnovations/joust
 	glide up
-	go get bitbucket.org/liamstask/goose/cmd/goose
 	git add --all
 	git commit -m"Initial Commit"
 
