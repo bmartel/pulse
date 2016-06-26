@@ -12,9 +12,6 @@ import (
 	"github.com/gin-gonic/contrib/gzip"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/proximityinnovations/pulse/app"
-	"github.com/proximityinnovations/pulse/config"
-	"github.com/proximityinnovations/pulse/db"
 )
 
 // App ... Application Graph
