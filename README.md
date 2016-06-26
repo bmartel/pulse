@@ -7,10 +7,8 @@ Run `make install`
 *This will*
 ##### Add project dependencies to glide
 ##### Copy `example.env` and modify for your environment
-  
-  `cp example.env .env`
 
-##### Fetch database migration tool
+  `cp example.env .env`
 
 ### Build
 Simply running `go build` will build the project, and running the output binary
@@ -34,4 +32,4 @@ in `routes.go`.
 Uses Gin's middleware chaining
 
 ### DB Models
-Uses Gorm for Database modelling and connections. Only supports sqlite, postgres and mysql. See http://jinzhu.me/gorm/
+Uses mgo, a MongoDB driver for Database modelling and connections. See https://labix.org/mgo
