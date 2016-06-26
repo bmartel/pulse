@@ -38,6 +38,9 @@ func main() {
 	// Html Template Renderer
 	r.HTMLRender = NewAmberRenderer(config.ViewDir, config.ViewExt, nil)
 
+	// Recover from system panics
+	r.Use(gin.Recovery())
+
 	// Compression
 	r.Use(gzip.Gzip(gzip.DefaultCompression))
 
@@ -52,21 +55,13 @@ func main() {
 
 	// Cookie Session Store
 	sessionStore := sessions.NewCookieStore([]byte(config.AppKey))
-	sessionStore.Options(func() sessions.Options {
-		options := sessions.Options{
-			Path:     "/",
-			Domain:   config.AppDomain,
-			MaxAge:   86400 * 14,
-			Secure:   true,
-			HttpOnly: true,
-		}
-
-		if config.AppEnv != "production" {
-			options.Secure = false
-		}
-
-		return options
-	}())
+	sessionStore.Options(sessions.Options{
+		Path:     "/",
+		Domain:   config.AppDomain,
+		MaxAge:   86400 * 14,
+		Secure:   config.AppEnv == "production",
+		HttpOnly: true,
+	})
 
 	// Session
 	router.Use(sessions.Sessions(config.SessionKey, sessionStore))
