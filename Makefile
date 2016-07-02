@@ -13,12 +13,13 @@ install:
 	glide get github.com/Sirupsen/logrus
 	glide get github.com/bmartel/joust
 	glide up
+	go get github.com/pilu/fresh
 	go get bitbucket.org/liamstask/goose/cmd/goose
 	git add --all
 	git commit -m"Initial Commit"
 
 development:
-	go build
+	fresh
 
 test:
 	go test $(shell glide novendor)

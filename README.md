@@ -2,12 +2,20 @@
 Cutting down the boilerplate to create impactful Go web apps.
 
 ## Getting started
+
+### SQL based projects
+Clone the project `git clone https://github.com/bmartel/pulse.git <your project name>`
+
+### MongoDB based projects
+Clone the project `git clone -b mongo https://github.com/bmartel/pulse.git <your project name>`
+
+Change to project dir `cd <your project name>`
 Run `make install`
 
 *This will*
 ##### Add project dependencies to glide
 ##### Copy `example.env` and modify for your environment
-  
+
   `cp example.env .env`
 
 ##### Fetch database migration tool
