@@ -12,6 +12,8 @@ import (
 	"github.com/gin-gonic/contrib/gzip"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/proximityinnovations/gin-amber"
+	"github.com/utrack/gin-csrf"
 )
 
 // App ... Application Graph
@@ -36,7 +38,7 @@ func main() {
 	r := gin.New()
 
 	// Html Template Renderer
-	r.HTMLRender = NewAmberRenderer(config.ViewDir, config.ViewExt, nil)
+	r.HTMLRender = ginamber.NewViewRenderer(config.ViewDir, config.ViewExt, nil)
 
 	// Recover from system panics
 	r.Use(gin.Recovery())
