@@ -6,13 +6,13 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/bmartel/gin-amber"
 	"github.com/facebookgo/inject"
 	"github.com/gin-gonic/contrib/cache"
 	"github.com/gin-gonic/contrib/ginrus"
 	"github.com/gin-gonic/contrib/gzip"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/proximityinnovations/gin-amber"
 	"github.com/utrack/gin-csrf"
 )
 
