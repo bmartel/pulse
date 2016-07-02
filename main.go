@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/bmartel/gin-amber"
 	"github.com/facebookgo/inject"
 	"github.com/gin-gonic/contrib/cache"
 	"github.com/gin-gonic/contrib/ginrus"
@@ -39,7 +40,7 @@ func main() {
 	r := gin.New()
 
 	// Html Template Renderer
-	r.HTMLRender = NewAmberRenderer(config.ViewDir, config.ViewExt, nil)
+	r.HTMLRender = ginamber.NewViewRenderer(config.ViewDir, config.ViewExt, nil)
 
 	// Recover from system panics
 	r.Use(gin.Recovery())
