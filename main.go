@@ -6,6 +6,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/bmartel/gin-amber"
+	"github.com/bmartel/zero"
 	"github.com/facebookgo/inject"
 	"github.com/gin-gonic/contrib/cache"
 	"github.com/gin-gonic/contrib/ginrus"
@@ -34,8 +35,11 @@ func main() {
 	// Redis Connection
 	redisConn := cache.NewRedisCache(config.RedisHost, config.RedisPassword, 5*time.Minute)
 
+	// Validation
+	zeroValidator := zero.New("valid")
+
 	// Dependency injection
-	inject.Populate(dbConn, redisConn, &appGraph)
+	inject.Populate(dbConn, redisConn, zeroValidator, &appGraph)
 
 	// Router
 	r := gin.New()
