@@ -11,6 +11,7 @@ install:
 	glide get github.com/facebookgo/inject
 	glide get github.com/utrack/gin-csrf
 	glide get github.com/Sirupsen/logrus
+	glide get github.com/bmartel/zero
 	glide get github.com/bmartel/joust
 	glide up
 	go get github.com/pilu/fresh
