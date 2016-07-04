@@ -3,15 +3,6 @@ install:
 	git init
 	cp example.env .env
 	glide init
-	glide get github.com/eknkc/amber
-	glide get github.com/joho/godotenv
-	glide get github.com/jinzhu/gorm
-	glide get github.com/gin-gonic/gin
-	glide get github.com/gin-gonic/gin/contrib
-	glide get github.com/facebookgo/inject
-	glide get github.com/utrack/gin-csrf
-	glide get github.com/Sirupsen/logrus
-	glide get github.com/bmartel/zero
 	glide get github.com/bmartel/joust
 	glide get github.com/onsi/ginkgo/ginkgo
 	glide get github.com/onsi/gomega
