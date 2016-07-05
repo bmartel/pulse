@@ -9,12 +9,12 @@ install:
 	glide get github.com/onsi/gomega
 	glide up
 	go get github.com/onsi/ginkgo/ginkgo
-	go get github.com/pilu/fresh
+	go get github.com/codegangsta/gin
 	git add --all
 	git commit -m"Initial Commit"
 
 development:
-	go build
+	gin -a 8080 run
 
 test:
 	go test $(shell glide novendor)
