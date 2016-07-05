@@ -4,3 +4,4 @@
 pulse
 /static/assets/*
 !/static/assets/.keep
+gin-bin
