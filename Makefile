@@ -1,13 +1,14 @@
 install:
+	go get github.com/Masterminds/glide
+	go get github.com/onsi/ginkgo/ginkgo
+	go get github.com/codegangsta/gin
+	go get bitbucket.org/liamstask/goose/cmd/goose
 	rm -rf .git
 	chmod +x ./install.sh
 	./install.sh
 	git init
 	cp example.env .env
 	glide install
-	go get github.com/onsi/ginkgo/ginkgo
-	go get github.com/codegangsta/gin
-	go get bitbucket.org/liamstask/goose/cmd/goose
 	git add --all
 	git commit -m"Initial Commit"
 
