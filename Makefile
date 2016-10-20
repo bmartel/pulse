@@ -1,12 +1,10 @@
 install:
 	rm -rf .git
+	chmod +x ./install.sh
+	./install.sh
 	git init
 	cp example.env .env
-	glide init
-	glide get github.com/bmartel/joust
-	glide get github.com/onsi/ginkgo/ginkgo
-	glide get github.com/onsi/gomega
-	glide up
+	glide install
 	go get github.com/onsi/ginkgo/ginkgo
 	go get github.com/codegangsta/gin
 	go get bitbucket.org/liamstask/goose/cmd/goose
@@ -20,4 +18,4 @@ test:
 	go test $(shell glide novendor)
 
 production:
-	go build -tags production
+	docker build .

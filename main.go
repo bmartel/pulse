@@ -1,4 +1,4 @@
-package main
+package main // import "github.com/bmartel/pulse"
 
 import (
 	"net/http"
@@ -6,6 +6,8 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/bmartel/gin-amber"
+	"github.com/bmartel/pulse/app"
+	"github.com/bmartel/pulse/config"
 	"github.com/bmartel/zero"
 	"github.com/facebookgo/inject"
 	"github.com/gin-gonic/contrib/cache"
