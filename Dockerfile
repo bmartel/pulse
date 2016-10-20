@@ -14,6 +14,8 @@ ENV DATABASE_TYPE sqlite3
 ENV ASSET_PATH /static
 ENV ASSET_DIR public
 
+ENV GIN_MODE=release
+
 COPY . /src
 WORKDIR /src
 RUN build

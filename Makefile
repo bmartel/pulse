@@ -19,4 +19,5 @@ test:
 	go test $(shell glide novendor)
 
 production:
-	docker build .
+	chmod +x ./build.sh
+	./build.sh
