@@ -1,4 +1,5 @@
 FROM bmartel/go:nonroot
+LABEL name "pulse-app"
 
 ENV APP_ENV production
 ENV APP_DEBUG false
