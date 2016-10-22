@@ -23,7 +23,7 @@ func ConnectMongo(hosts []string, username string, password string, defaultDb st
 	mongoDBDialInfo := &mgo.DialInfo{
 		Addrs:    hosts,
 		Timeout:  60 * time.Second,
-		Database: "admin",
+		Database: defaultDb,
 		Username: username,
 		Password: password,
 	}

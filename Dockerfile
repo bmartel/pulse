@@ -1,0 +1,25 @@
+FROM bmartel/go:nonroot
+LABEL name "pulse-app"
+
+ENV APP_ENV production
+ENV APP_DEBUG false
+ENV APP_DOMAIN http://localhost:8080
+ENV APP_PORT :8080
+ENV SESSION_KEY pulse_session
+
+ENV VIEW_DIR views
+ENV VIEW_EXT .jade
+
+ENV ASSET_PATH /static
+ENV ASSET_DIR public
+
+ENV GIN_MODE=release
+
+COPY . /src
+WORKDIR /src
+RUN build
+USER nobody
+
+EXPOSE 8080
+
+CMD [ "/src/webapp" ]

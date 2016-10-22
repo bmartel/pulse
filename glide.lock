@@ -1,0 +1,82 @@
+hash: cd0175f1e2b2f5fb3d07038a2d1b167f2cce357349b104da462960db3d6a4159
+updated: 2016-10-22T10:42:01.727106965-05:00
+imports:
+- name: github.com/bmartel/gin-amber
+  version: e56fa546587801cf7b5b9d116626e227dcc6703e
+- name: github.com/bmartel/zero
+  version: 9d61fbf5338e1900c1f090fc70aaae93f3b0e3bd
+- name: github.com/boj/redistore
+  version: fc113767cd6b051980f260d6dbe84b2740c46ab0
+- name: github.com/bradfitz/gomemcache
+  version: fb1f79c6b65acda83063cbc69f6bba1522558bfc
+  subpackages:
+  - memcache
+- name: github.com/dchest/uniuri
+  version: 8902c56451e9b58ff940bbe5fec35d5f9c04584a
+- name: github.com/eknkc/amber
+  version: a69a021e158c3b06700cc881c05d0923f627b578
+  subpackages:
+  - parser
+- name: github.com/facebookgo/inject
+  version: cc1aa653e50f6a9893bcaef89e673e5b24e1e97b
+- name: github.com/facebookgo/structtag
+  version: 217e25fb96916cc60332e399c9aa63f5c422ceed
+- name: github.com/garyburd/redigo
+  version: ffa8d46ada782d81cfda81a0fbd9f45ceae448e8
+  subpackages:
+  - redis
+  - internal
+- name: github.com/gin-gonic/contrib
+  version: cf28f84316e50a05a59d174b37c26ad9a43a1201
+  subpackages:
+  - cache
+  - ginrus
+  - gzip
+  - sessions
+- name: github.com/gin-gonic/gin
+  version: 3900df04d2a88e22beaf6a2970c63648b9e1b0e1
+  subpackages:
+  - render
+  - binding
+- name: github.com/golang/protobuf
+  version: 2402d76f3d41f928c7902a765dfc872356dd3aad
+  subpackages:
+  - proto
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/securecookie
+  version: fa5329f913702981df43dcb2a380bac429c810b5
+- name: github.com/gorilla/sessions
+  version: ca9ada44574153444b00d3fd9c8559e4cc95f896
+- name: github.com/joho/godotenv
+  version: 4ed13390c0acd2ff4e371e64d8b97c8954138243
+  subpackages:
+  - autoload
+- name: github.com/manucorporat/sse
+  version: ee05b128a739a0fb76c7ebd3ae4810c1de808d6d
+- name: github.com/robfig/go-cache
+  version: 9fc39e0dbf62c034ec4e45e6120fc69433a3ec51
+- name: github.com/Sirupsen/logrus
+  version: 3ec0642a7fb6488f65b06f9040adc67e3990296a
+- name: github.com/utrack/gin-csrf
+  version: 63c0ef5eca6cc70a0cd93a8b2ca8a9e2b860d155
+- name: golang.org/x/net
+  version: f315505cf3349909cdf013ea56690da34e96a451
+  subpackages:
+  - context
+- name: golang.org/x/sys
+  version: 002cbb5f952456d0c50e0d2aff17ea5eca716979
+  subpackages:
+  - unix
+- name: gopkg.in/go-playground/validator.v8
+  version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
+- name: gopkg.in/mgo.v2
+  version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
+  subpackages:
+  - bson
+  - internal/sasl
+  - internal/scram
+  - internal/json
+- name: gopkg.in/yaml.v2
+  version: a5b47d31c556af34a302ce5d659e6fea44d90de0
+devImports: []

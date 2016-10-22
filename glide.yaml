@@ -1,0 +1,18 @@
+package: ""
+import:
+- package: github.com/Sirupsen/logrus
+- package: github.com/bmartel/gin-amber
+- package: github.com/bmartel/zero
+- package: github.com/facebookgo/inject
+- package: github.com/gin-gonic/contrib
+  subpackages:
+  - cache
+  - ginrus
+  - gzip
+  - sessions
+- package: github.com/gin-gonic/gin
+- package: github.com/joho/godotenv
+  subpackages:
+  - autoload
+- package: github.com/utrack/gin-csrf
+- package: gopkg.in/mgo.v2
