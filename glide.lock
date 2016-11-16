@@ -1,5 +1,5 @@
-hash: 7fa7b2580daa54b482934d6ab0db6efe486282a7b0559c5f3d330d2749fad46e
-updated: 2016-10-19T22:01:19.108947315-05:00
+hash: 8e94d727810028f4a2bf099f0020d8b49ecf127f4657915087714ff7cfec76f2
+updated: 2016-11-15T20:55:20.390339503-06:00
 imports:
 - name: github.com/bmartel/gin-amber
   version: e56fa546587801cf7b5b9d116626e227dcc6703e
@@ -24,20 +24,20 @@ imports:
 - name: github.com/garyburd/redigo
   version: ffa8d46ada782d81cfda81a0fbd9f45ceae448e8
   subpackages:
-  - redis
   - internal
+  - redis
 - name: github.com/gin-gonic/contrib
   version: cf28f84316e50a05a59d174b37c26ad9a43a1201
   subpackages:
+  - cache
   - ginrus
   - gzip
   - sessions
-  - cache
 - name: github.com/gin-gonic/gin
   version: 3900df04d2a88e22beaf6a2970c63648b9e1b0e1
   subpackages:
-  - render
   - binding
+  - render
 - name: github.com/golang/protobuf
   version: 2402d76f3d41f928c7902a765dfc872356dd3aad
   subpackages:
@@ -64,6 +64,8 @@ imports:
   version: ee05b128a739a0fb76c7ebd3ae4810c1de808d6d
 - name: github.com/mattn/go-sqlite3
   version: e5a3c16c5c1d80b24f633e68aecd6b0702786d3d
+- name: github.com/pressly/goose
+  version: d6e8fe0292718c30342b3ed7f324dc21634b3bc6
 - name: github.com/robfig/go-cache
   version: 9fc39e0dbf62c034ec4e45e6120fc69433a3ec51
 - name: github.com/Sirupsen/logrus
@@ -82,4 +84,4 @@ imports:
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2
   version: a5b47d31c556af34a302ce5d659e6fea44d90de0
-devImports: []
+testImports: []

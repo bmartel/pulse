@@ -2,7 +2,7 @@ install:
 	go get github.com/Masterminds/glide
 	go get github.com/onsi/ginkgo/ginkgo
 	go get github.com/codegangsta/gin
-	go get bitbucket.org/liamstask/goose/cmd/goose
+	go get github.com/pressly/goose
 	rm -rf .git
 	chmod +x ./install.sh
 	./install.sh
