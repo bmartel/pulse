@@ -9,6 +9,7 @@ install:
 	git init
 	mv ./config/local.yml ./config/config.yml
 	glide install
+	go install ./vendor/github.com/mattn/go-sqlite3
 	git add --all
 	git commit -m"Initial Commit"
 
