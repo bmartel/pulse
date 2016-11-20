@@ -8,6 +8,7 @@ import (
 	"github.com/bmartel/gin-amber"
 	"github.com/bmartel/pulse/app"
 	"github.com/bmartel/pulse/config"
+	"github.com/bmartel/pulse/db"
 	"github.com/bmartel/zero"
 	"github.com/facebookgo/inject"
 	"github.com/gin-gonic/contrib/cache"
@@ -25,7 +26,6 @@ type App struct {
 }
 
 func main() {
-
 	var appGraph App
 
 	// Database connection
@@ -33,6 +33,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	// Run any db migrations
+	db.Migrate(dbConn)
 
 	// Redis Connection
 	redisConn := cache.NewRedisCache(config.RedisHost, config.RedisPassword, 5*time.Minute)

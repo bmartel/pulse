@@ -1,5 +1,5 @@
-hash: 8e94d727810028f4a2bf099f0020d8b49ecf127f4657915087714ff7cfec76f2
-updated: 2016-11-15T20:55:20.390339503-06:00
+hash: 8badf50992913502fe2b49f5440bb63c255b275188b3220540f36dbfe2863fa3
+updated: 2016-11-19T22:54:14.752939959-06:00
 imports:
 - name: github.com/bmartel/gin-amber
   version: e56fa546587801cf7b5b9d116626e227dcc6703e
@@ -64,8 +64,6 @@ imports:
   version: ee05b128a739a0fb76c7ebd3ae4810c1de808d6d
 - name: github.com/mattn/go-sqlite3
   version: e5a3c16c5c1d80b24f633e68aecd6b0702786d3d
-- name: github.com/pressly/goose
-  version: d6e8fe0292718c30342b3ed7f324dc21634b3bc6
 - name: github.com/robfig/go-cache
   version: 9fc39e0dbf62c034ec4e45e6120fc69433a3ec51
 - name: github.com/Sirupsen/logrus
@@ -81,7 +79,9 @@ imports:
   subpackages:
   - unix
 - name: gopkg.in/go-playground/validator.v8
-  version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
+  version: c193cecd124b5cc722d7ee5538e945bdb3348435
+- name: gopkg.in/gormigrate.v1
+  version: 3935a5b05d4d54b9792449b3f563e2ad8c4fa5b6
 - name: gopkg.in/yaml.v2
   version: a5b47d31c556af34a302ce5d659e6fea44d90de0
 testImports: []

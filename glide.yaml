@@ -22,4 +22,5 @@ import:
 - package: github.com/bradfitz/gomemcache
   subpackages:
   - memcache
-- package: github.com/pressly/goose
+- package: gopkg.in/gormigrate.v1
+  version: ^1.1.2
