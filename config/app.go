@@ -1,10 +1,12 @@
 package config
 
 import (
+	"log"
+
+	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"log"
 
 	"github.com/spf13/viper"
 )
@@ -15,12 +17,15 @@ func Apply() {
 	viper.SetConfigType("yaml")
 	viper.SetConfigName("config")
 	viper.AddConfigPath(".")
+	viper.AddConfigPath("./config")
 
 	if err := viper.ReadInConfig(); err != nil {
 		log.Println("config file not found, using defaults")
 	}
 
 	setDefaults()
+
+	gin.SetMode(viper.GetString("GIN_MODE"))
 }
 
 // Default config settings if not found in the env or config file(s)
