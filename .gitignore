@@ -1,6 +1,8 @@
 /vendor
 /tmp/*
 .env
+config.yml
+/db/*.sqlite3
 pulse
 /static/assets/*
 !/static/assets/.keep
