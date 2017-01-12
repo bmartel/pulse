@@ -1,0 +1,22 @@
+APP_ENV: local
+APP_DEBUG: true
+APP_KEY: APPKEY
+APP_DOMAIN: 'http://localhost:8080'
+PORT: 8080
+SESSION_KEY: pulse_session
+
+GIN_MODE: debug
+
+ASSET_PATH: '/static'
+ASSET_DIR: public
+
+VIEW_DIR: views
+VIEW_EXT: .jade
+
+DATABASE_DEFAULT: test
+DATABASE_HOST: localhost:27017
+DATABASE_USER: test
+DATABASE_PASSWORD: secret
+
+REDIS_HOST: localhost:6379
+REDIS_PASSWORD: secret

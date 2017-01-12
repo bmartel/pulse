@@ -2,7 +2,7 @@ package main // import "github.com/bmartel/pulse"
 
 import (
 	"net/http"
-	"strings"
+	"strconv"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -17,6 +17,7 @@ import (
 	"github.com/gin-gonic/contrib/gzip"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 	"github.com/utrack/gin-csrf"
 )
 
@@ -26,26 +27,31 @@ type App struct {
 }
 
 func main() {
+		// Apply environment and config file
+	config.Apply()
 
+	// Start app with db connection on specified port
+	AppStart(viper.GetInt("PORT"), db.Connect())
+}
+
+// AppStart will run the application with the specified db connection and on specified port
+func AppStart(port int, conn *db.MongoStore) {
 	var appGraph App
 
-	// Database connection
-	mongoConn := db.ConnectMongo(strings.Split(config.DbHost, ","), config.DbUser, config.DbPass, config.DbDefault)
-
 	// Redis Connection
-	redisConn := cache.NewRedisCache(config.RedisHost, config.RedisPassword, 5*time.Minute)
+	redisConn := cache.NewRedisCache(viper.GetString("REDIS_HOST"), viper.GetString("REDIS_PASSWORD"), 5*time.Minute)
 
 	// Validation
 	zeroValidator := zero.New("valid")
 
 	// Dependency injection
-	inject.Populate(mongoConn, redisConn, zeroValidator, &appGraph)
+	inject.Populate(conn, redisConn, zeroValidator, &appGraph)
 
 	// Router
 	r := gin.New()
 
 	// Html Template Renderer
-	r.HTMLRender = ginamber.NewViewRenderer(config.ViewDir, config.ViewExt, nil)
+	r.HTMLRender = ginamber.NewViewRenderer(viper.GetString("VIEW_DIR"), viper.GetString("VIEW_EXT"), nil)
 
 	// Recover from system panics
 	r.Use(gin.Recovery())
@@ -54,7 +60,7 @@ func main() {
 	r.Use(gzip.Gzip(gzip.DefaultCompression))
 
 	// Load Assets
-	r.Static(config.AssetPath, config.AssetDir)
+	r.Static(viper.GetString("ASSET_PATH"), viper.GetString("ASSET_DIR"))
 
 	// Declare a subgroup for app routes so middleware is not run for templates or assets
 	router := r.Group("/")
@@ -63,21 +69,21 @@ func main() {
 	router.Use(ginrus.Ginrus(logrus.StandardLogger(), time.RFC3339, true))
 
 	// Cookie Session Store
-	sessionStore := sessions.NewCookieStore([]byte(config.AppKey))
+	sessionStore := sessions.NewCookieStore([]byte(viper.GetString("APP_KEY")))
 	sessionStore.Options(sessions.Options{
 		Path:     "/",
-		Domain:   config.AppDomain,
+		Domain:   viper.GetString("APP_DOMAIN"),
 		MaxAge:   86400 * 14,
-		Secure:   config.AppEnv == "production",
+		Secure:   viper.GetString("APP_ENV") == "production",
 		HttpOnly: true,
 	})
 
 	// Session
-	router.Use(sessions.Sessions(config.SessionKey, sessionStore))
+	router.Use(sessions.Sessions(viper.GetString("SESSION_KEY"), sessionStore))
 
 	// CSRF
 	router.Use(csrf.Middleware(csrf.Options{
-		Secret: config.AppKey,
+		Secret: viper.GetString("APP_KEY"),
 		ErrorFunc: func(c *gin.Context) {
 			c.String(http.StatusBadRequest, "CSRF token mismatch")
 			c.Abort()
@@ -87,6 +93,6 @@ func main() {
 	// Register routes
 	appGraph.RouteMap.Register(router)
 
-	// Run application on $APP_PORT
-	r.Run(config.AppPort)
+	// Run application on $PORT
+	r.Run(":" + strconv.Itoa(port))
 }

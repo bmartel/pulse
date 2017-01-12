@@ -1,62 +1,46 @@
 package config
 
 import (
-	"os"
+	"log"
 
-	// Autoload all the values from .env
-	_ "github.com/joho/godotenv/autoload"
+	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
 
-// === APPLICATION ===
+// Apply config settings from the env, and config file(s
+func Apply() {
+	viper.AutomaticEnv()
+	viper.SetConfigType("yaml")
+	viper.SetConfigName("config")
+	viper.AddConfigPath(".")
+	viper.AddConfigPath("./config")
 
-// AppPort ... Application port to run server
-var AppPort = os.Getenv("APP_PORT")
+	if err := viper.ReadInConfig(); err != nil {
+		log.Println("config file not found, using defaults")
+	}
 
-// AppEnv ... Application environment
-var AppEnv = os.Getenv("APP_ENV")
+	setDefaults()
 
-// AppDebug ... Application debug mode
-var AppDebug = os.Getenv("APP_DEBUG")
+	gin.SetMode(viper.GetString("GIN_MODE"))
+}
 
-// AppKey ... Application secret key for signing requests and cookies
-var AppKey = os.Getenv("APP_KEY")
-
-// AppDomain ... Application domain for cookie and url generation
-var AppDomain = os.Getenv("APP_DOMAIN")
-
-// SessionKey ... Application user session key
-var SessionKey = os.Getenv("SESSION_KEY")
-
-// AssetPath ... Application assets url path
-var AssetPath = os.Getenv("ASSET_PATH")
-
-// AssetDir ... Application assets location
-var AssetDir = os.Getenv("ASSET_DIR")
-
-// ViewDir ... View templates location
-var ViewDir = os.Getenv("VIEW_DIR")
-
-// ViewExt ... View file extension
-var ViewExt = os.Getenv("VIEW_EXT")
-
-// === DATABASE ===
-
-// DbHost ... comma separated list of db hosts
-var DbHost = os.Getenv("DATABASE_HOST")
-
-// DbUser ... user to run database operations
-var DbUser = os.Getenv("DATABASE_USER")
-
-// DbPass ... db user password
-var DbPass = os.Getenv("DATABASE_PASSWORD")
-
-// DbDefault ... app default database
-var DbDefault = os.Getenv("DATABASE_DEFAULT")
-
-// === CACHE ===
-
-// RedisHost ... Redis connection host
-var RedisHost = os.Getenv("REDIS_HOST")
-
-// RedisPassword ... Redis connection password
-var RedisPassword = os.Getenv("REDIS_PASSWORD")
+// Default config settings if not found in the env or config file(s)
+func setDefaults() {
+	viper.SetDefault("APP_KEY", "")
+	viper.SetDefault("APP_ENV", "production")
+	viper.SetDefault("APP_DEBUG", false)
+	viper.SetDefault("APP_DOMAIN", "")
+	viper.SetDefault("ASSET_PATH", "/static")
+	viper.SetDefault("ASSET_DIR", "public")
+	viper.SetDefault("VIEW_DIR", "views")
+	viper.SetDefault("VIEW_EXT", ".jade")
+	viper.SetDefault("SESSION_KEY", "pulse_session")
+	viper.SetDefault("DATABASE_HOST", "localhost:27017")
+	viper.SetDefault("DATABASE_USER", "")
+	viper.SetDefault("DATABASE_PASSWORD", "")
+	viper.SetDefault("DATABASE_DEFAULT", "pulse")
+	viper.SetDefault("REDIS_HOST", "localhost:6379")
+	viper.SetDefault("REDIS_PASS", "")
+	viper.SetDefault("GIN_MODE", "release")
+	viper.SetDefault("PORT", 8080)
+}

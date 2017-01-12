@@ -1,8 +1,10 @@
 package db
 
 import (
+	"strings"
 	"time"
-
+	
+	"github.com/spf13/viper"
 	"gopkg.in/mgo.v2"
 )
 
@@ -19,13 +21,14 @@ func (conn *MongoStore) Open() *mgo.Session {
 	return conn.Session.Copy()
 }
 
-func ConnectMongo(hosts []string, username string, password string, defaultDb string) *MongoStore {
+func Connect() *MongoStore {
+	// hosts []string, username string, password string, defaultDb string
 	mongoDBDialInfo := &mgo.DialInfo{
-		Addrs:    hosts,
+		Addrs:    strings.Split(viper.GetString("DATABASE_HOST"), ","),
 		Timeout:  60 * time.Second,
-		Database: defaultDb,
-		Username: username,
-		Password: password,
+		Database: viper.GetString("DATABASE_DEFAULT"),
+		Username: viper.GetString("DATABASE_USER"),
+		Password: viper.GetString("DATABASE_PASSWORD"),
 	}
 
 	session, err := mgo.DialWithInfo(mongoDBDialInfo)
@@ -36,7 +39,7 @@ func ConnectMongo(hosts []string, username string, password string, defaultDb st
 	session.SetMode(mgo.Monotonic, true)
 
 	return &MongoStore{
-		Name:    defaultDb,
+		Name:    viper.GetString("DATABASE_DEFAULT"),
 		Session: session,
 	}
 }

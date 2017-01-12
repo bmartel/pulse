@@ -1,5 +1,5 @@
-hash: cd0175f1e2b2f5fb3d07038a2d1b167f2cce357349b104da462960db3d6a4159
-updated: 2016-10-22T10:42:01.727106965-05:00
+hash: 20bc3c4f03631d84a9d0bd638a587dac6ae7271b672e9ebb4da63ed70c810411
+updated: 2017-01-12T11:15:04.826396741-06:00
 imports:
 - name: github.com/bmartel/gin-amber
   version: e56fa546587801cf7b5b9d116626e227dcc6703e
@@ -18,46 +18,77 @@ imports:
   subpackages:
   - parser
 - name: github.com/facebookgo/inject
-  version: cc1aa653e50f6a9893bcaef89e673e5b24e1e97b
+  version: d5029152fecb2a8e68f7f8eb3c6391fc8ee70496
 - name: github.com/facebookgo/structtag
   version: 217e25fb96916cc60332e399c9aa63f5c422ceed
+- name: github.com/fsnotify/fsnotify
+  version: fd9ec7deca8bf46ecd2a795baaacf2b3a9be1197
 - name: github.com/garyburd/redigo
-  version: ffa8d46ada782d81cfda81a0fbd9f45ceae448e8
+  version: 6ece6e0a09f28cc399b21550cbf37ab39ba63cce
   subpackages:
-  - redis
   - internal
+  - redis
 - name: github.com/gin-gonic/contrib
-  version: cf28f84316e50a05a59d174b37c26ad9a43a1201
+  version: 547e518040cfb96576b507d2f26779ab9c6fc829
   subpackages:
   - cache
   - ginrus
   - gzip
   - sessions
 - name: github.com/gin-gonic/gin
-  version: 3900df04d2a88e22beaf6a2970c63648b9e1b0e1
+  version: e2212d40c62a98b388a5eb48ecbdcf88534688ba
   subpackages:
-  - render
   - binding
+  - render
 - name: github.com/golang/protobuf
   version: 2402d76f3d41f928c7902a765dfc872356dd3aad
   subpackages:
   - proto
 - name: github.com/gorilla/context
-  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+  version: 1c83b3eabd45b6d76072b66b746c20815fb2872d
 - name: github.com/gorilla/securecookie
-  version: fa5329f913702981df43dcb2a380bac429c810b5
+  version: e95799a481bbcc3d01c2ad5178524cb8bec9f370
 - name: github.com/gorilla/sessions
-  version: ca9ada44574153444b00d3fd9c8559e4cc95f896
-- name: github.com/joho/godotenv
-  version: 4ed13390c0acd2ff4e371e64d8b97c8954138243
+  version: 3752dbe3d898496114ebb398c8960ff127cbbe93
+- name: github.com/hashicorp/hcl
+  version: eb6f65b2d77ed5078887f960ff570fbddbbeb49d
   subpackages:
-  - autoload
+  - hcl/ast
+  - hcl/parser
+  - hcl/scanner
+  - hcl/strconv
+  - hcl/token
+  - json/parser
+  - json/scanner
+  - json/token
+- name: github.com/magiconair/properties
+  version: 00ec919ecb56326853e2c1eee377fa324bc23a79
 - name: github.com/manucorporat/sse
   version: ee05b128a739a0fb76c7ebd3ae4810c1de808d6d
+- name: github.com/mattn/go-isatty
+  version: 56b76bdf51f7708750eac80fa38b952bb9f32639
+- name: github.com/mitchellh/mapstructure
+  version: bfdb1a85537d60bc7e954e600c250219ea497417
+- name: github.com/pelletier/go-buffruneio
+  version: df1e16fde7fc330a0ca68167c23bf7ed6ac31d6d
+- name: github.com/pelletier/go-toml
+  version: 439fbba1f887c286024370cb4f281ba815c4c7d7
 - name: github.com/robfig/go-cache
   version: 9fc39e0dbf62c034ec4e45e6120fc69433a3ec51
 - name: github.com/Sirupsen/logrus
-  version: 3ec0642a7fb6488f65b06f9040adc67e3990296a
+  version: d26492970760ca5d33129d2d799e34be5c4782eb
+- name: github.com/spf13/afero
+  version: 72b31426848c6ef12a7a8e216708cb0d1530f074
+  subpackages:
+  - mem
+- name: github.com/spf13/cast
+  version: 56a7ecbeb18dde53c6db4bd96b541fd9741b8d44
+- name: github.com/spf13/jwalterweatherman
+  version: fa7ca7e836cf3a8bb4ebf799f472c12d7e903d66
+- name: github.com/spf13/pflag
+  version: 25f8b5b07aece3207895bf19f7ab517eb3b22a40
+- name: github.com/spf13/viper
+  version: 5ed0fc31f7f453625df314d8e66b9791e8d13003
 - name: github.com/utrack/gin-csrf
   version: 63c0ef5eca6cc70a0cd93a8b2ca8a9e2b860d155
 - name: golang.org/x/net
@@ -65,18 +96,22 @@ imports:
   subpackages:
   - context
 - name: golang.org/x/sys
-  version: 002cbb5f952456d0c50e0d2aff17ea5eca716979
+  version: 9bb9f0998d48b31547d975974935ae9b48c7a03c
   subpackages:
   - unix
+- name: golang.org/x/text
+  version: 44f4f658a783b0cee41fe0a23b8fc91d9c120558
+  subpackages:
+  - transform
+  - unicode/norm
 - name: gopkg.in/go-playground/validator.v8
-  version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
+  version: c193cecd124b5cc722d7ee5538e945bdb3348435
 - name: gopkg.in/mgo.v2
-  version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
+  version: d90005c5262a3463800497ea5a89aed5fe22c886
   subpackages:
   - bson
   - internal/sasl
   - internal/scram
-  - internal/json
 - name: gopkg.in/yaml.v2
-  version: a5b47d31c556af34a302ce5d659e6fea44d90de0
-devImports: []
+  version: e4d366fc3c7938e2958e662b4258c7a89e1f0e3e
+testImports: []

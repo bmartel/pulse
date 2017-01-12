@@ -1,6 +1,7 @@
-package: ""
+package: github.com/bmartel/pulse
 import:
 - package: github.com/Sirupsen/logrus
+  version: ~0.11.0
 - package: github.com/bmartel/gin-amber
 - package: github.com/bmartel/zero
 - package: github.com/facebookgo/inject
@@ -11,8 +12,7 @@ import:
   - gzip
   - sessions
 - package: github.com/gin-gonic/gin
-- package: github.com/joho/godotenv
-  subpackages:
-  - autoload
+  version: ~1.1.4
+- package: github.com/spf13/viper
 - package: github.com/utrack/gin-csrf
 - package: gopkg.in/mgo.v2
